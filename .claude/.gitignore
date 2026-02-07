@@ -1,0 +1,7 @@
+# Claude Code 로컬 설정 파일 (개인 환경 설정, 커밋하지 않음)
+settings.local.json
+CLAUDE.local.md
+
+# 개인 노트
+notes/
+*.local.*

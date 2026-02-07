@@ -10,8 +10,11 @@
 .cxx
 local.properties
 
-# Claude AI
-.claude/
+# Claude AI (로컬 설정만 제외)
+.claude/settings.local.json
+.claude/CLAUDE.local.md
+.claude/notes/
+.claude/**/*.local.*
 
 # Firebase
 google-services.json

@@ -1,0 +1,60 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "comment": "master 브랜치 편집 금지",
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash",
+            "args": [
+              "-c",
+              "BRANCH=$(git branch --show-current 2>/dev/null || echo 'unknown'); if [ \"$BRANCH\" = \"master\" ]; then echo '{\"block\": true, \"message\": \"❌ master 브랜치에서는 직접 편집할 수 없습니다. feature 브랜치를 생성하세요.\"}' >&2; exit 2; fi"
+            ],
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "comment": "Kotlin 파일 자동 포맷팅 (ktlint)",
+        "matcher": "Edit|Write",
+        "pathPattern": "**/*.kt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash",
+            "args": [
+              "-c",
+              "if command -v ktlint >/dev/null 2>&1; then ktlint -F \"$CLAUDE_TOOL_PATH\" 2>&1 || echo '{\"feedback\": \"⚠️  ktlint 포맷팅 실패 (무시됨)\"}'; else echo '{\"feedback\": \"ℹ️  ktlint가 설치되지 않음 (포맷팅 건너뜀)\"}'; fi"
+            ],
+            "timeout": 10,
+            "suppressOutput": true
+          }
+        ]
+      },
+      {
+        "comment": "테스트 파일 수정 시 해당 테스트 실행",
+        "matcher": "Edit|Write",
+        "pathPattern": "**/src/test/**/*Test.kt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash",
+            "args": [
+              "-c",
+              "echo '{\"feedback\": \"🧪 테스트 실행을 원하면 \\`./gradlew test\\`를 실행하세요.\"}'"
+            ],
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "environment": {
+    "ANDROID_HOME": "${ANDROID_HOME}",
+    "JAVA_HOME": "${JAVA_HOME}"
+  }
+}
