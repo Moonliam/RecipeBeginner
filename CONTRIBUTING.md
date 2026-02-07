@@ -53,32 +53,33 @@ git checkout -b refactor/repository-layer
 작업 중에는 **자주 커밋하고 원격 브랜치에 푸시**합니다.
 
 ```bash
-# 작업 내용 커밋 (커밋 메시지는 상세하게)
+# 작업 내용 커밋 (커밋 메시지는 한국어로 상세하게)
 git add .
-git commit -m "Add recipe list UI with LazyColumn
+git commit -m "LazyColumn을 사용한 레시피 목록 UI 추가
 
-- Implement RecipeListScreen composable
-- Add RecipeCard component with image and title
-- Integrate with RecipeViewModel
-- Add loading and error states"
+- RecipeListScreen composable 구현
+- 이미지와 제목을 포함한 RecipeCard 컴포넌트 추가
+- RecipeViewModel과 연동
+- 로딩 및 에러 상태 추가"
 
 # 원격 브랜치에 푸시 (자주 push하여 백업 & 공유)
 git push origin feature/recipe-list-ui
 ```
 
 **커밋 메시지 가이드:**
-- 첫 줄: 50자 이내의 간결한 요약 (명령문 형태)
+- **언어: 한국어 사용**
+- 첫 줄: 50자 이내의 간결한 요약
 - 빈 줄 추가
 - 본문: 무엇을, 왜 변경했는지 상세히 설명
 - 관련 이슈가 있다면 `Fixes #123` 형식으로 참조
 
 **예시:**
 ```
-Fix timer crash when pausing during cooking
+요리 중 일시정지 시 타이머 크래시 수정
 
-- Add null check for timerJob before canceling
-- Handle edge case when timer is already completed
-- Add unit tests for pause/resume scenarios
+- timerJob 취소 전 null 체크 추가
+- 타이머가 이미 완료된 경우 예외 처리
+- 일시정지/재개 시나리오 단위 테스트 추가
 
 Fixes #42
 ```
@@ -206,7 +207,7 @@ GitHub Flow에서는 hotfix를 별도로 구분하지 않습니다.
 
 `.gitmessage` 파일:
 ```
-# <타입>: <제목> (50자 이내)
+# 제목 (50자 이내, 한국어)
 
 # 본문 (필요 시, 72자마다 줄바꿈)
 # - 무엇을 변경했는지
